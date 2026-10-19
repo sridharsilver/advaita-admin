@@ -19,7 +19,7 @@ type IconBtnProps = {
 function IconBtn({ label, children, onClick, as = "button", to, href, target, hoverClass = "hover:bg-muted" }: IconBtnProps) {
   const cls = `relative group flex flex-col items-center p-2 rounded-xl transition ${hoverClass}`;
   const tooltip = (
-    <span className="pointer-events-none absolute -bottom-7 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-foreground px-2 py-0.5 text-[10px] font-semibold text-background opacity-0 group-hover:opacity-100 transition-opacity z-50 shadow">
+    <span className="hidden md:group-hover:inline-block pointer-events-none absolute -bottom-7 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-foreground px-2 py-0.5 text-[10px] font-semibold text-background z-50 shadow">
       {label}
     </span>
   );
@@ -121,24 +121,24 @@ export function ProposalsManager() {
   };
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 py-6 sm:py-10 max-w-5xl">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
-        <div>
-          <h1 className="text-3xl font-extrabold tracking-tight">Proposals</h1>
-          <p className="text-sm text-muted-foreground mt-1">Draft, send, and monitor professional creative and design proposals.</p>
+    <div className="w-full max-w-5xl mx-auto px-3 sm:px-6 py-5 sm:py-10 min-w-0 overflow-x-hidden">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 sm:mb-8 min-w-0">
+        <div className="min-w-0">
+          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">Proposals</h1>
+          <p className="text-xs sm:text-sm text-muted-foreground mt-1">Draft, send, and monitor professional creative and design proposals.</p>
         </div>
         <Link 
           to="/admin/proposals/new"
-          className="inline-flex items-center justify-center rounded-full bg-foreground px-6 py-3 text-sm font-medium text-background transition hover:opacity-90 gap-2 w-full md:w-auto text-center"
+          className="inline-flex items-center justify-center rounded-xl sm:rounded-full bg-foreground px-5 py-2.5 text-sm font-medium text-background transition hover:opacity-90 gap-2 w-full sm:w-auto text-center shrink-0"
         >
           <Plus className="h-4 w-4" />
           Create Proposal
         </Link>
       </div>
 
-      <div className="space-y-6">
+      <div className="space-y-4 sm:space-y-6 min-w-0">
         {/* Filter and Search Bar */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-between items-center bg-background/50 border border-border rounded-2xl p-4">
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-between items-stretch sm:items-center bg-background/50 border border-border rounded-2xl p-3 sm:p-4 min-w-0">
           <div className="relative w-full sm:max-w-xs">
             <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
             <input
@@ -179,7 +179,7 @@ export function ProposalsManager() {
             <p>No proposals found.</p>
           </div>
         ) : (
-          <div className="grid gap-4 animate-fade-in">
+          <div className="grid gap-3 sm:gap-4 animate-fade-in min-w-0">
             {proposals
               .filter(p => {
                 const matchesSearch = p.title.toLowerCase().includes(proposalSearch.toLowerCase()) || p.client_name.toLowerCase().includes(proposalSearch.toLowerCase());
@@ -207,12 +207,12 @@ export function ProposalsManager() {
                   "border-l-slate-300 dark:border-l-slate-600";
 
                 return (
-                <div key={p.id} className={`glass border border-border/50 border-l-4 ${statusBorderColor} rounded-2xl p-6 hover:shadow-sm transition-all relative overflow-visible`}>
-                  <div className="flex justify-between items-start gap-4">
-                    <div className="space-y-1 flex-1 min-w-0">
-                      <div className="flex flex-wrap items-center gap-2">
-                        <h3 className="font-semibold text-lg truncate">{p.title}</h3>
-                        <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${
+                <div key={p.id} className={`glass border border-border/50 border-l-4 ${statusBorderColor} rounded-2xl p-4 sm:p-6 hover:shadow-sm transition-all relative overflow-visible min-w-0 max-w-full`}>
+                  <div className="flex items-start justify-between gap-2.5 sm:gap-4 min-w-0">
+                    <div className="space-y-1.5 flex-1 min-w-0">
+                      <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 min-w-0">
+                        <h3 className="font-semibold text-base sm:text-lg break-words line-clamp-2 max-w-full">{p.title}</h3>
+                        <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider shrink-0 ${
                           p.status === "Approved" ? "bg-emerald-500/10 text-emerald-600" :
                           p.status === "Sent" ? "bg-blue-500/10 text-blue-600" :
                           p.status === "Rejected" ? "bg-red-500/10 text-red-500" :
@@ -221,18 +221,18 @@ export function ProposalsManager() {
                           {p.status}
                         </span>
                         {expiryInfo && (
-                          <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${expiryInfo.color}`}>
+                          <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold shrink-0 ${expiryInfo.color}`}>
                             {expiryInfo.label}
                           </span>
                         )}
                       </div>
-                      <div className="flex flex-wrap items-center gap-2 mt-1">
-                        <span className="text-sm text-muted-foreground">Client: {p.client_name} {p.company_name && `(${p.company_name})`}</span>
+                      <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm text-muted-foreground min-w-0">
+                        <span className="truncate max-w-full">Client: {p.client_name} {p.company_name && `(${p.company_name})`}</span>
                         {p.project_type && (
-                          <span className="text-[10px] font-semibold bg-muted text-muted-foreground px-2 py-0.5 rounded-md">{p.project_type}</span>
+                          <span className="text-[10px] font-semibold bg-muted text-muted-foreground px-2 py-0.5 rounded-md shrink-0">{p.project_type}</span>
                         )}
                         {p.password && (
-                          <span className="inline-flex items-center gap-1 text-[10px] bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 px-2 py-0.5 rounded-md font-mono select-all" title="Auto-generated Passcode">
+                          <span className="inline-flex items-center gap-1 text-[10px] bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 px-2 py-0.5 rounded-md font-mono select-all shrink-0" title="Auto-generated Passcode">
                             🔑 {p.password}
                           </span>
                         )}
@@ -240,15 +240,15 @@ export function ProposalsManager() {
                     </div>
 
                     {/* Action Buttons + Cover Thumbnail */}
-                    <div className="flex items-start gap-2 flex-shrink-0">
+                    <div className="flex items-start gap-1 sm:gap-2 shrink-0">
                       {p.cover_image && (
                         <img
                           src={p.cover_image}
                           alt="Cover"
-                          className="hidden sm:block w-14 h-10 object-cover rounded-lg border border-border/50 flex-shrink-0"
+                          className="hidden sm:block w-14 h-10 object-cover rounded-lg border border-border/50 shrink-0"
                         />
                       )}
-                    <div className="flex items-center gap-1">
+                    <div className="flex items-center gap-0.5 sm:gap-1 shrink-0">
                       <IconBtn label="Edit" as="link" to={`/admin/proposals/edit/${p.id}`}>
                         <Pencil className="h-4 w-4 text-muted-foreground" />
                       </IconBtn>
@@ -263,15 +263,16 @@ export function ProposalsManager() {
                             setActiveProposalMenu(activeProposalMenu === p.id ? null : p.id);
                           }}
                           className="p-2 hover:bg-muted rounded-xl transition flex items-center justify-center relative group"
+                          aria-label="More options"
                         >
                           <MoreVertical className="h-4 w-4 text-muted-foreground" />
-                          <span className="pointer-events-none absolute -bottom-7 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-foreground px-2 py-0.5 text-[10px] font-semibold text-background opacity-0 group-hover:opacity-100 transition-opacity z-50 shadow">
-                            More Actions
+                          <span className="hidden md:group-hover:inline-block pointer-events-none absolute -bottom-7 right-0 whitespace-nowrap rounded-md bg-foreground px-2 py-0.5 text-[10px] font-semibold text-background z-50 shadow">
+                            More
                           </span>
                         </button>
                         
                         {activeProposalMenu === p.id && (
-                          <div className="absolute right-0 mt-2 w-56 bg-card border border-border rounded-xl shadow-lg py-1.5 z-50">
+                          <div className="absolute right-0 mt-2 w-52 max-w-[calc(100vw-3rem)] bg-card border border-border rounded-xl shadow-xl py-1.5 z-50">
                             <button onClick={() => handleDuplicateProposal(p.id)} className="w-full flex items-center gap-2 px-4 py-2 text-xs font-semibold hover:bg-muted text-left">
                               <Copy className="h-3.5 w-3.5" /> Duplicate
                             </button>
@@ -332,17 +333,17 @@ export function ProposalsManager() {
                     </div>
                   </div>
 
-                  <div className="flex flex-wrap items-center justify-between gap-4 mt-6 pt-4 border-t border-border/40 text-xs text-muted-foreground">
-                    <div className="flex items-center gap-4">
-                      <span className="flex items-center gap-1">
+                  <div className="flex flex-wrap items-center justify-between gap-3 sm:gap-4 mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-border/40 text-xs text-muted-foreground min-w-0">
+                    <div className="flex items-center gap-3 sm:gap-4">
+                      <span className="flex items-center gap-1 shrink-0">
                         <Eye className="h-3.5 w-3.5" /> {p.views || 0} Views
                       </span>
-                      <span className="flex items-center gap-1">
+                      <span className="flex items-center gap-1 shrink-0">
                         <Download className="h-3.5 w-3.5" /> {p.downloads || 0} Downloads
                       </span>
                     </div>
                     {p.updated_at && (
-                      <span className="flex items-center gap-1">
+                      <span className="flex items-center gap-1 shrink-0">
                         <Calendar className="h-3.5 w-3.5" /> Updated: {new Date(p.updated_at).toLocaleDateString()}
                       </span>
                     )}

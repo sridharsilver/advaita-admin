@@ -115,7 +115,7 @@ export function AdminLayout() {
 
   return (
     <ThemeProvider>
-      <div className="min-h-screen bg-background text-foreground flex flex-col md:flex-row tap-highlight-none selection:bg-primary/20">
+      <div className="min-h-screen bg-background text-foreground flex flex-col md:flex-row tap-highlight-none selection:bg-primary/20 w-full max-w-full overflow-x-hidden">
         {/* Desktop Left Sidebar */}
         {isAuthenticated && (
           <aside className="hidden md:flex flex-col w-64 border-r border-border bg-card fixed h-screen top-0 left-0 z-40">
@@ -180,10 +180,10 @@ export function AdminLayout() {
         )}
 
         {/* Main Content Area */}
-        <div className={`flex-1 flex flex-col ${isAuthenticated ? "md:pl-64 pb-20 md:pb-0" : ""}`}>
+        <div className={`flex-1 flex flex-col min-w-0 max-w-full overflow-x-hidden ${isAuthenticated ? "md:pl-64 pb-20 md:pb-0" : ""}`}>
           {/* Mobile Top App Bar */}
           {isAuthenticated && (
-            <header className="border-b border-border/80 bg-background/85 sticky top-0 z-30 px-4 h-15 flex items-center justify-between backdrop-blur-xl safe-top">
+            <header className="border-b border-border/80 bg-background/85 sticky top-0 z-30 px-4 h-15 flex items-center justify-between backdrop-blur-xl safe-top w-full max-w-full">
               <div className="flex items-center gap-2.5">
                 <div className="h-8 w-8 rounded-xl bg-gradient-brand flex items-center justify-center text-primary-foreground shadow-sm">
                   <Sparkles className="h-4 w-4" />
@@ -224,7 +224,7 @@ export function AdminLayout() {
             </header>
           )}
 
-          <main className="flex-1 flex flex-col">
+          <main className="flex-1 flex flex-col min-w-0 max-w-full overflow-x-hidden">
             <AnimatePresence mode="wait">
               <motion.div
                 key={location.pathname + location.search}
@@ -232,7 +232,7 @@ export function AdminLayout() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -6 }}
                 transition={{ duration: 0.2 }}
-                className="flex-1 flex flex-col"
+                className="flex-1 flex flex-col min-w-0 max-w-full overflow-x-hidden"
               >
                 <Outlet />
               </motion.div>
