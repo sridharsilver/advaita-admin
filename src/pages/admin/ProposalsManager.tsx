@@ -284,7 +284,7 @@ export function ProposalsManager() {
                             </button>
                             <div className="border-t border-border my-1" />
                             <a
-                              href={`https://wa.me/${p.client_phone ? p.client_phone.replace(/\D/g, "") : ""}?text=${encodeURIComponent(`Hi ${p.client_name},\n\nPlease find your project proposal here:\n${window.location.origin}/proposal/${p.slug}\n\n*Passcode: ${p.password}*\n(Please enter this passcode to view the proposal)\n\nLooking forward to hearing from you!`)}`}
+                              href={`https://wa.me/${p.client_phone ? p.client_phone.replace(/\D/g, "") : ""}?text=${encodeURIComponent(`Hi ${p.client_name},\n\nPlease find your project proposal here:\n${window.location.origin}/proposal/${p.slug}${p.password ? `\n\n*Passcode: ${p.password}*\n(Please enter this passcode to view the proposal)` : ""}\n\nLooking forward to hearing from you!`)}`}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="flex items-center gap-2 px-4 py-2 text-xs font-semibold hover:bg-[#25D366]/10 text-[#25D366]"
@@ -292,7 +292,7 @@ export function ProposalsManager() {
                               <MessageCircle className="h-3.5 w-3.5" /> Send via WhatsApp
                             </a>
                             <a
-                              href={`mailto:${p.client_email || ""}?subject=${encodeURIComponent(`Proposal: ${p.title}`)}&body=${encodeURIComponent(`Hi ${p.client_name},\n\nPlease find your project proposal here:\n${window.location.origin}/proposal/${p.slug}\n\n*Passcode: ${p.password}*\n(Please enter this passcode to view the proposal)\n\nFeel free to review the proposal and let me know if you have any questions.\n\nBest regards`)}`}
+                              href={`mailto:${p.client_email || ""}?subject=${encodeURIComponent(`Proposal: ${p.title}`)}&body=${encodeURIComponent(`Hi ${p.client_name},\n\nPlease find your project proposal here:\n${window.location.origin}/proposal/${p.slug}${p.password ? `\n\n*Passcode: ${p.password}*\n(Please enter this passcode to view the proposal)` : ""}\n\nFeel free to review the proposal and let me know if you have any questions.\n\nBest regards`)}`}
                               className="flex items-center gap-2 px-4 py-2 text-xs font-semibold hover:bg-blue-500/10 text-blue-500"
                             >
                               <Mail className="h-3.5 w-3.5" /> Send via Email

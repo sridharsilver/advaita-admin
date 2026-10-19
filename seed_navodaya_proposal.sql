@@ -6,6 +6,7 @@ INSERT OR REPLACE INTO proposals (
     project_type,
     status,
     valid_until,
+    password,
     content_json
 ) VALUES (
     'Technical Product Drawings & Specification Sheets',
@@ -15,6 +16,7 @@ INSERT OR REPLACE INTO proposals (
     'Technical Drawings & Product Sheets',
     'Sent',
     '2026-11-15',
+    'NAV789PK',
     '[
   {
     "id": "hero_1",

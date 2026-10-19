@@ -20,6 +20,21 @@ const generatePasscode = () => {
 export const onRequestGet: PagesFunction<Env> = async (context) => {
   try {
     await migrateSchema(context.env.DB);
+
+    // Auto-backfill passcode for any legacy or seeded proposals that don't have one
+    const unpassworded = await context.env.DB.prepare(
+      "SELECT id FROM proposals WHERE password IS NULL OR password = ''"
+    ).all<any>();
+
+    if (unpassworded.results && unpassworded.results.length > 0) {
+      for (const row of unpassworded.results) {
+        const newCode = generatePasscode();
+        await context.env.DB.prepare(
+          "UPDATE proposals SET password = ? WHERE id = ?"
+        ).bind(newCode, row.id).run();
+      }
+    }
+
     const { results } = await context.env.DB.prepare(
       "SELECT * FROM proposals ORDER BY created_at DESC"
     ).all();
