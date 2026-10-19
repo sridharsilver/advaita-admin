@@ -1,0 +1,11 @@
+name = "advaita-admin"
+compatibility_date = "2024-03-20"
+pages_build_output_dir = "dist"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "advaita-portfolio"
+database_id = "c563de6a-22ba-4ac6-8d9b-c6b6be6cfd63" # Local dev doesn't care, remote needs actual ID
+
+[ai]
+binding = "AI"

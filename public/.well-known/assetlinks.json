@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "dev.pages.advaitadesigns.twa",
+      "sha256_cert_fingerprints": [
+        "88:7F:EA:38:DB:4B:40:1D:0F:60:69:12:0C:2B:BE:A1:D2:E1:27:49:39:68:F1:87:AA:3D:9B:D0:BD:8B:1A:21"
+      ]
+    }
+  }
+]

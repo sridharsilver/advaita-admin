@@ -1,0 +1,26 @@
+{
+  "name": "Advaita Designs — Freelance Design by Sridhar Silver",
+  "short_name": "Advaita Designs",
+  "description": "Sridhar Silver is an independent freelance designer crafting brands, websites, UI/UX, and print for purpose-driven brands.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#09090b",
+  "theme_color": "#09090b",
+  "categories": ["business", "design"],
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ]
+}
